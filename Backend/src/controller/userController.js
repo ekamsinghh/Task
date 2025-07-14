@@ -1,4 +1,5 @@
 const User = require("../models/User")
+const History = require("../models/History")
 
 const getUsers = async (req,res) => {
     try{
@@ -53,6 +54,13 @@ const claimPoints = async (req,res) => {
                 new:true
             }
         );
+        const userId = req.params.id;
+
+        await History.create({
+            user: userId,
+            points: point
+        });
+        
         return res.status(200).json({
             Success: true,
             message: "Points Added Successfully",

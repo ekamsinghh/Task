@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import BackgroundLayout from '../layout/backgroundLayout';
 import axios from 'axios';
@@ -9,6 +9,8 @@ const Leaderboard = () => {
   const  userId  = useParams(); 
   const userid = userId.id
   
+  const navigate = useNavigate();
+
   const [leaderboardData, setLeaderboardData] = useState([]);
 
   const heights = ['h-44', 'h-60', 'h-36'];
@@ -63,7 +65,7 @@ const Leaderboard = () => {
     <BackgroundLayout>
 
       <div className="flex flex-col items-center px-4 pt-16 gap-10">
-        <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 text-transparent bg-clip-text mb-2">
+        <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 text-transparent bg-clip-text mb-2 relative md:-top-3 top-3">
           🏆 Leaderboard 🏆
         </h1>
 
@@ -162,12 +164,20 @@ const Leaderboard = () => {
         </ul>
       </div>
 
-      <div className="absolute top-10 right-10">
+      <div className="absolute top-5  right-5 md:top-10 md:right-10">
         <button 
-        className=" text-white text-3xl font-semibold bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 border-3 border-white px-10 py-1 rounded-3xl cursor-pointer hover:scale-110 active:scale-100"
+        className=" text-white text-xl md:text-3xl font-semibold bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 border-3 border-white px-10 py-1 rounded-3xl cursor-pointer hover:scale-110 active:scale-100"
         onClick= {handleClick}
         >
             Claim
+        </button>
+      </div>
+      <div className="absolute top-5  left-5 md:top-10 md:left-10">
+        <button 
+        className=" text-white text-xl md:text-3xl font-semibold bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 border-3 border-white px-10 py-1 rounded-3xl cursor-pointer hover:scale-110 active:scale-100"
+        onClick= {() => navigate(`/history/${userid}`)}
+        >
+        ⏱️ History
         </button>
       </div>
     </BackgroundLayout>
