@@ -37,7 +37,37 @@ const createUser = async (req,res) => {
         });
     }
 }
+
+const claimPoints = async (req,res) => {
+    try{
+        const min = 0;
+        const max = 10;
+        const point = Math.floor(Math.random() * (max - min + 1)) + min;
+        await User.findByIdAndUpdate(req.params.id,
+            {
+                $inc:{
+                    points:point
+                }
+            },
+            {
+                new:true
+            }
+        );
+        return res.status(200).json({
+            Success: true,
+            message: "Points Added Successfully",
+        })
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({
+            status:"Error",
+            message:"Internal Server Error"
+        });
+    }
+}
 module.exports={
     getUsers,
-    createUser
+    createUser,
+    claimPoints
 }

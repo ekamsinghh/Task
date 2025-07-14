@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 //Middlware setup for cross origin requests
 app.use(cors({
     origin: "*",// Allows the requests from all the origins
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE","PATCH"],
     allowedHeaders: ["Content-Type", "Authorization"]// if we don't define or set these two are the default values
 }));
 
